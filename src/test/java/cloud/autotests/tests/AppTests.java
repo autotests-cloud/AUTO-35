@@ -12,7 +12,7 @@ import static io.qameta.allure.Allure.step;
 
 public class AppTests extends TestBase {
     @Test
-    @Description("Soon to be implemented by QA.GURU engineers")
+    @Description("Проверка поиска на Ютубе")
     @DisplayName("YouTube search test")
     void generatedTest() {
         step("Open 'http://www.youtube.com/'", () -> {
