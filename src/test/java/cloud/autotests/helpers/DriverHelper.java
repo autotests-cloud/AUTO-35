@@ -1,8 +1,8 @@
 package cloud.autotests.helpers;
 
+import cloud.autotests.config.DriverConfig;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import cloud.autotests.config.DriverConfig;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -61,6 +61,7 @@ public class DriverHelper {
     public static void configureDriver() {
         addListener("AllureSelenide", new AllureSelenide());
 
+
 //        Configuration.baseUrl = TestData.getWebUrl();
         Configuration.browser = getDriverConfig().webBrowser();
         Configuration.browserVersion = getDriverConfig().webBrowserVersion();
@@ -68,18 +69,19 @@ public class DriverHelper {
         Configuration.timeout = 10000;
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-
         if (isWebMobile()) { // for chrome only
             ChromeOptions chromeOptions = new ChromeOptions();
             Map<String, Object> mobileDevice = new HashMap<>();
             mobileDevice.put("deviceName", getWebMobile());
             chromeOptions.setExperimentalOption("mobileEmulation", mobileDevice);
             capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+            capabilities.setCapability("language", "ru");
         }
 
         if (isRemoteWebDriver()) {
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", true);
+            capabilities.setCapability("language", "ru");
             Configuration.remote = getWebRemoteDriver();
         }
 
